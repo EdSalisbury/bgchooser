@@ -1,6 +1,6 @@
 import request = require("supertest");
 import app from "../src/index"; // import your Express app
-import { Server } from 'http';
+import { Server } from "http";
 
 describe("GET /", () => {
   let server: Server;
@@ -9,7 +9,7 @@ describe("GET /", () => {
     server = app.listen(); // start the server
   });
 
-  afterAll((done) => {
+  afterAll(done => {
     server.close(done); // close the server after your tests
   });
 
