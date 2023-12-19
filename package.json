@@ -29,10 +29,14 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "tsc && node ./dist/index.js",
+    "start": "node ./dist/src/server.js",
+    "build": "rm -rf ./dist && tsc",
     "dev": "nodemon src/index.ts",
+    "package": "rm -f dist.zip && zip -r dist.zip . -i ./dist/src/* package.json yarn.lock && git add --all",
+    "dev-deploy": "yarn build && yarn package && eb deploy --staged && rm -f dist.zip",
     "test": "jest --config jest.config.js",
     "lint": "eslint '*/**/*.{ts,tsx}'",
+    "logs": "eb logs",
     "format": "prettier --write '*/**/*.{ts,tsx,json}'"   
   }
 }
