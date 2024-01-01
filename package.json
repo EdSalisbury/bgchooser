@@ -44,19 +44,17 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "node ./dist/src/server.js",
-    "dev:start": "ts-node src/main.ts",
+    "start": "NODE_ENV=production node ./dist/src/main.js",
+    "dev:start": "NODE_ENV=development nodemon ./src/main.ts",
     "dev:db:start": "dotenv -- bash -c 'docker run --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=1 -e MYSQL_USER=${MYSQL_USER} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} -e MYSQL_DATABASE=${DB_NAME} -p 3306:3306 -d mysql'",
     "dev:db:stop": "docker stop mysql && docker rm mysql",
     "dev:db:shell": "dotenv -- bash -c 'docker exec -it mysql mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD}'",
     "build": "rm -rf ./dist && tsc",
-    "dev": "nodemon src/index.ts",
-    "package": "rm -f dist.zip && zip -r dist.zip . -i ./dist/src/* package.json yarn.lock && git add --all",
+    "package": "rm -f dist.zip && zip -r dist.zip . -i ./dist/src/* package.json yarn.lock .env.production && git add --all",
     "dev-deploy": "yarn build && yarn package && eb deploy --staged && rm -f dist.zip",
     "test": "jest --config jest.config.js",
     "lint": "eslint '*/**/*.{ts,tsx}'",
     "logs": "eb logs",
-    "format": "prettier --write '*/**/*.{ts,tsx,json}'",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "format": "prettier --write '*/**/*.{ts,tsx,json}'"
   }
 }
