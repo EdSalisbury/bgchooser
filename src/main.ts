@@ -19,11 +19,7 @@ function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-function rootRoutes(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+function rootRoutes(req: Request, res: Response, next: NextFunction) {
   if (req.url === "/" || req.url === "/api" || req.url === "/api/v1") {
     res.send({ validRoutes: ["/api/v1/users"] });
   }
@@ -39,6 +35,6 @@ async function bootstrap() {
   app.setGlobalPrefix("api/v1");
   app.use(loggerMiddleware);
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();
