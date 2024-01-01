@@ -44,6 +44,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
+    "start-old": "NODE_ENV=production prisma generate && node ./dist/main.js",
     "start": "NODE_ENV=production node ./dist/main.js",
     "postinstall": "prisma generate",
     "dev:start": "NODE_ENV=development nodemon ./src/main.ts",
@@ -51,7 +52,7 @@
     "dev:db:stop": "docker stop mysql && docker rm mysql",
     "dev:db:shell": "dotenv -- bash -c 'docker exec -it mysql mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD}'",
     "build": "rm -rf ./dist && tsc && prisma generate",
-    "package": "yarn build && rm -f dist.zip && zip dist.zip ./dist/main.js ./dist/*.module.js ./dist/*.service.js ./dist/*.controller.js ./dist/**/*.module.js ./dist/**/*.controller.js ./dist/**/*.service.js ./dist/**/dto/* .env.production package.json yarn.lock",
+    "package": "yarn build && rm -f dist.zip && zip dist.zip ./dist/main.js ./dist/*.module.js ./dist/*.service.js ./dist/*.controller.js ./dist/**/*.module.js ./dist/**/*.controller.js ./dist/**/*.service.js ./dist/**/dto/* .env.production package.json yarn.lock prisma/schema.prisma",
     "deploy": "yarn package && eb deploy",
     "test": "jest --config jest.config.js",
     "lint": "eslint '*/**/*.{ts,tsx}'",
