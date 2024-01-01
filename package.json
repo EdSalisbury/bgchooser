@@ -45,6 +45,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node ./dist/main.js",
+    "postinstall": "prisma generate",
     "dev:start": "NODE_ENV=development nodemon ./src/main.ts",
     "dev:db:start": "dotenv -- bash -c 'docker run --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=1 -e MYSQL_USER=${MYSQL_USER} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} -e MYSQL_DATABASE=${DB_NAME} -p 3306:3306 -d mysql'",
     "dev:db:stop": "docker stop mysql && docker rm mysql",
